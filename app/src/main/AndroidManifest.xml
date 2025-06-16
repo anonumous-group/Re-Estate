@@ -25,6 +25,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReEstate"
         tools:targetApi="31" >
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCW1es2pU2mZudp487p03FmcZZXwgTGBgY"/>
+
         <activity
             android:name=".activity.auth.LocationScreen"
             android:exported="false" />
