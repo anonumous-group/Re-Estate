@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/main_background"
     tools:context=".activity.MainScreen">
 
     <FrameLayout
@@ -18,7 +18,8 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/rounded_top_bg"
+        app:backgroundTint="@color/white"
         app:elevation="0dp"
         app:itemTextColor="@color/bottom_nav"
         app:itemIconTint="@color/bottom_nav"
