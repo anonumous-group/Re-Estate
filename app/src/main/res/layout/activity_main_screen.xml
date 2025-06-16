@@ -23,6 +23,7 @@
         app:elevation="0dp"
         app:itemTextColor="@color/bottom_nav"
         app:itemIconTint="@color/bottom_nav"
+        app:itemRippleColor="@color/blue"
         app:menu="@menu/bottom_nav"
         app:labelVisibilityMode="labeled"
         android:id="@+id/bottom_nav"/>
