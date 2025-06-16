@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.re_estate.R;
 import com.example.re_estate.databinding.ActivityMainScreenBinding;
 import com.example.re_estate.fragment.ExploreFragment;
+import com.example.re_estate.fragment.FavoriteFragment;
 import com.example.re_estate.fragment.HomeFragment;
 
 public class MainScreen extends AppCompatActivity {
@@ -37,6 +38,9 @@ public class MainScreen extends AppCompatActivity {
                         .commit();
             } else if (item.getItemId() == R.id.explore) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new ExploreFragment())
+                        .commit();
+            } else if (item.getItemId() == R.id.favorite) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new FavoriteFragment())
                         .commit();
             }
 
