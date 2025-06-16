@@ -28,7 +28,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCW1es2pU2mZudp487p03FmcZZXwgTGBgY"/>
+            android:value="API_KEY"/>
 
         <activity
             android:name=".activity.auth.LocationScreen"
