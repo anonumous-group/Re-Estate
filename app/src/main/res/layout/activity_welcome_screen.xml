@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/off_white"
+    tools:context=".activity.auth.WelcomeScreen">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="70dp"
+        android:src="@drawable/app_logo"
+        android:layout_marginBottom="25dp"
+        app:tint="@color/blue"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout"
+        android:paddingBottom="50dp"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_top_bg"
+        android:backgroundTint="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Discover and Find Your Perfect Dream House"
+            android:textColor="@color/blue"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/inter_28pt_bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="App to search and discover the most suitable place for you to stay"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/inter_28pt_medium"
+            android:textColor="@color/gray"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_bg"
+            app:backgroundTint="@color/blue"
+            android:text="Let's Get Started"
+            android:textAllCaps="false"
+            android:layout_marginVertical="10dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/inter_28pt_bold"
+            android:textColor="@color/white"
+            android:id="@+id/btn_create"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:text="Sign in"
+            android:fontFamily="@font/inter_28pt_bold"
+            android:id="@+id/btn_log"/>
+    </LinearLayout>
+
+</LinearLayout>

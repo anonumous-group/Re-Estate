@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "260776792341",
+    "project_id": "lumina-c28d3",
+    "storage_bucket": "lumina-c28d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260776792341:android:14b039d3d72b22788bd91c",
+        "android_client_info": {
+          "package_name": "com.example.re_estate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260776792341-kn6ue1rh61vng724ukip892l54noqfua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpTL1N2k3ABErdpb-WXSadk-Vk3puhb9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260776792341-kn6ue1rh61vng724ukip892l54noqfua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260776792341:android:f9eb9d46590208e58bd91c",
+        "android_client_info": {
+          "package_name": "com.example.sparkdelivery_riders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260776792341-kn6ue1rh61vng724ukip892l54noqfua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpTL1N2k3ABErdpb-WXSadk-Vk3puhb9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260776792341-kn6ue1rh61vng724ukip892l54noqfua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

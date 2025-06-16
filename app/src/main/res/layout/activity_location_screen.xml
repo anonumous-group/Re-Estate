@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.auth.LocationScreen"
+    android:background="@color/white"
+    android:padding="16dp">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:padding="25dp"
+        android:src="@drawable/location_on"
+        android:background="@drawable/rounded_corner_bg"
+        android:backgroundTint="@color/off_white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/inter_28pt_bold"
+        android:text="What is Your Location?"
+        android:textSize="25sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="@font/inter_28pt_medium"
+        android:text="We need to know your location in order to suggest nearby services."
+        android:textColor="@color/gray"
+        android:textSize="18sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_corner_bg"
+        app:backgroundTint="@color/blue"
+        android:fontFamily="@font/inter_28pt_bold"
+        android:text="Allow Location Access"
+        android:textColor="@color/white"
+        android:id="@+id/btn_location"/>
+
+</LinearLayout>

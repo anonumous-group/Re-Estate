@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/rounded_top_bg"
+    android:backgroundTint="@color/white"
+    android:paddingBottom="20dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@drawable/close"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/btn_close"/>
+
+    <TextView
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edge_bg"
+        android:backgroundTint="@color/off_white"
+        android:layout_marginHorizontal="10dp"
+        android:padding="10dp"
+        android:text="@string/camera"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/inter_28pt_medium"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        app:drawableStartCompat="@drawable/camera"
+        app:drawableTint="@color/gray"/>
+
+    <TextView
+        android:id="@+id/gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edge_bg"
+        android:backgroundTint="@color/off_white"
+        android:layout_marginHorizontal="10dp"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/gallery"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/inter_28pt_medium"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        app:drawableStartCompat="@drawable/camera"
+        app:drawableTint="@color/gray"/>
+
+</LinearLayout>
