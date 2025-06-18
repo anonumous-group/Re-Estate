@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.re_estate.R;
 import com.example.re_estate.databinding.ActivityMainScreenBinding;
@@ -17,6 +20,10 @@ import com.example.re_estate.fragment.HomeFragment;
 
 public class MainScreen extends AppCompatActivity {
     ActivityMainScreenBinding binding;
+    private HomeFragment homeFragment;
+    private ExploreFragment exploreFragment;
+    private FavoriteFragment favoriteFragment;
+    private Fragment activeFragment; // To keep track of the currently active fragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,28 +39,69 @@ public class MainScreen extends AppCompatActivity {
             return insets;
         });
 
+        // Set the initial fragment (e.g., HomeFragment)
+        if (savedInstanceState == null) {
+            // Initialize fragments.
+            homeFragment = new HomeFragment();
+            exploreFragment = new ExploreFragment();
+            favoriteFragment = new FavoriteFragment();
+
+            // Add all fragments initially and hide them, show the first one
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.frame_layout, homeFragment);
+            transaction.add(R.id.frame_layout, exploreFragment);
+            transaction.add(R.id.frame_layout, favoriteFragment);
+            transaction.commit();
+            activeFragment = homeFragment;
+        }
+        else {
+            // Re-acquire fragment instances after a configuration change (if needed)
+            homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("1");
+            exploreFragment = (ExploreFragment) getSupportFragmentManager().findFragmentByTag("2");
+            favoriteFragment = (FavoriteFragment) getSupportFragmentManager().findFragmentByTag("3");
+            // Determine active fragment based on saved instance state if you save it, or default to home
+            // For simplicity, we'll re-select the bottom nav item which will trigger the show/hide logic
+        }
+
         binding.bottomNav.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.home) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment())
-                        .commit();
-            } else if (item.getItemId() == R.id.explore) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new ExploreFragment())
-                        .commit();
-            } else if (item.getItemId() == R.id.favorite) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new FavoriteFragment())
-                        .commit();
+            Fragment fragment = null;
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.home) {
+                fragment = homeFragment;
+            } else if (itemId == R.id.explore) {
+                fragment = exploreFragment;
+            } else if (itemId == R.id.favorite) {
+                fragment = favoriteFragment;
+            }
+
+            if (fragment != null && fragment != activeFragment) {
+                loadFragment(fragment);
             }
 
             return true;
         });
 
 
+        // Ensure the correct fragment is shown if the activity is recreated
+        // and an item was already selected.
+        // Or select the initial one
+        if (savedInstanceState == null) {
+            binding.bottomNav.setSelectedItemId(R.id.home); // Or your default
+        }
+
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment())
-                .commit();
+    private void loadFragment(Fragment fragment){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        if (activeFragment != null) {
+            transaction.hide(activeFragment);
+        }
+        transaction.show(fragment);
+        transaction.commit();
+        activeFragment = fragment;
     }
 }

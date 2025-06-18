@@ -66,9 +66,9 @@ public class FavoriteFragment extends Fragment {
         Query query;
 
         if (queryText.isEmpty()) {
-            query = favCol().orderBy("timestamp", Query.Direction.DESCENDING);
+            query = favCol().orderBy("createdAt", Query.Direction.DESCENDING);
         } else {
-            query = favCol().whereEqualTo("title", queryText).orderBy("timestamp", Query.Direction.DESCENDING);
+            query = favCol().whereEqualTo("title", queryText).orderBy("createdAt", Query.Direction.DESCENDING);
         }
 
         List<Property> properties = new ArrayList<>();
@@ -80,21 +80,18 @@ public class FavoriteFragment extends Fragment {
                         Property property = snapshot.toObject(Property.class);
                         properties.add(property);
                     }
-                    if (properties.isEmpty()) {
-                        binding.noFav.setVisibility(View.VISIBLE);
-                        if (queryText.isEmpty()) {
-                            binding.noFav.setText(R.string.no_favorites_found);
-                        } else {
-                            binding.noFav.setText(MessageFormat.format("No results found for {0}", queryText));
-                        }
-                    } else {
-                        binding.noFav.setVisibility(View.GONE);
-                        FavoriteAdapter adapter = new FavoriteAdapter(getContext(), properties, property -> {});
-                        binding.favList.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-                    }
+
+                    binding.noFav.setVisibility(View.GONE);
+                    FavoriteAdapter adapter = new FavoriteAdapter(getContext(), properties, property -> {});
+                    binding.favList.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 } else {
-                    sendMessage(getContext(), "No favorites found");
+                    binding.noFav.setVisibility(View.VISIBLE);
+                    if (queryText.isEmpty()) {
+                        binding.noFav.setText(snapshots.isEmpty() ? "No favorites" : "No results found");
+                    } else {
+                        binding.noFav.setText(MessageFormat.format("No results found for {0}", queryText));
+                    }
                 }
             }
         });
