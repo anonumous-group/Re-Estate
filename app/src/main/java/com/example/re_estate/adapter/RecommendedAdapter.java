@@ -1,5 +1,7 @@
 package com.example.re_estate.adapter;
 
+import static com.example.re_estate.misc.FirebaseUtil.favCol;
+import static com.example.re_estate.misc.FirebaseUtil.favDoc;
 import static com.example.re_estate.misc.FirebaseUtil.userDoc;
 import static com.example.re_estate.misc.FirebaseUtil.userId;
 import static com.example.re_estate.misc.Utilities.formatPrice;
@@ -68,9 +70,11 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             // Add to favorites
             if (user.getFavorites().contains(property.getPropertyId())) {
                 user.getFavorites().remove(property.getPropertyId());
+                favDoc(property.getPropertyId()).delete();
                 holder.add_fav.setImageResource(R.drawable.favorite_border);
             } else {
                 user.getFavorites().add(property.getPropertyId());
+                favDoc(property.getPropertyId()).set(property);
                 holder.add_fav.setImageResource(R.drawable.favorite);
             }
             userDoc(userId()).update("favorites", user.getFavorites());

@@ -23,14 +23,13 @@ import com.example.re_estate.database.User;
 import java.text.MessageFormat;
 import java.util.List;
 
-public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.propertyHolder> {
-
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.viewHolder> {
     Context context;
     List<Property> properties;
     onItemClickListener listener;
     User user;
 
-    public PropertyAdapter(Context context, List<Property> properties, onItemClickListener listener) {
+    public FavoriteAdapter(Context context, List<Property> properties, onItemClickListener listener) {
         this.context = context;
         this.properties = properties;
         this.listener = listener;
@@ -38,13 +37,13 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.proper
 
     @NonNull
     @Override
-    public propertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.properties, parent, false);
-        return new propertyHolder(v);
+        return new viewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull propertyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         Property property = properties.get(position);
         Glide.with(context).load(property.getImages().get(0)).into(holder.property_image);
         holder.property_price.setText(MessageFormat.format("${0}", formatPrice(property.getPrice())));
@@ -87,10 +86,11 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.proper
         void onItemClick(Property property);
     }
 
-    public static class propertyHolder extends RecyclerView.ViewHolder {
+    public static class viewHolder extends RecyclerView.ViewHolder{
         ImageView property_image, add_fav;
         TextView property_price, property_category, property_name, property_location;
-        public propertyHolder(@NonNull View itemView) {
+
+        public viewHolder(@NonNull View itemView) {
             super(itemView);
             property_image = itemView.findViewById(R.id.property_image);
             add_fav = itemView.findViewById(R.id.add_fav);

@@ -1,7 +1,12 @@
 package com.example.re_estate.fragment;
 
+import static com.example.re_estate.databinding.FragmentFavoriteBinding.inflate;
+import static com.example.re_estate.misc.FirebaseUtil.favCol;
+import static com.example.re_estate.misc.Utilities.sendMessage;
+
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,58 +14,89 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.re_estate.R;
+import com.example.re_estate.adapter.FavoriteAdapter;
+import com.example.re_estate.database.Property;
+import com.example.re_estate.databinding.FragmentFavoriteBinding;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FavoriteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 public class FavoriteFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public FavoriteFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FavoriteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FavoriteFragment newInstance(String param1, String param2) {
-        FavoriteFragment fragment = new FavoriteFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    FragmentFavoriteBinding binding;
+    String queryText = "";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false);
+        binding = inflate(inflater, container, false);
+
+        binding.btnOpenSearch.setOnClickListener(v -> {
+            binding.searchContainer.setVisibility(View.VISIBLE);
+            binding.searchBar.requestFocus();
+            binding.toolbar.setVisibility(View.GONE);
+        });
+
+        binding.btnClose.setOnClickListener(v -> {
+            binding.searchContainer.setVisibility(View.GONE);
+            binding.toolbar.setVisibility(View.VISIBLE);
+            showFav();
+        });
+
+        binding.btnSearch.setOnClickListener(v -> {
+            queryText = binding.searchBar.getText().toString();
+            showFav();
+        });
+
+        showFav();
+
+        return binding.getRoot();
+    }
+
+    private void showFav() {
+        Query query;
+
+        if (queryText.isEmpty()) {
+            query = favCol().orderBy("timestamp", Query.Direction.DESCENDING);
+        } else {
+            query = favCol().whereEqualTo("title", queryText).orderBy("timestamp", Query.Direction.DESCENDING);
+        }
+
+        List<Property> properties = new ArrayList<>();
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot snapshots = task.getResult();
+                if (snapshots != null && !snapshots.isEmpty()) {
+                    for (QueryDocumentSnapshot snapshot : snapshots) {
+                        Property property = snapshot.toObject(Property.class);
+                        properties.add(property);
+                    }
+                    if (properties.isEmpty()) {
+                        binding.noFav.setVisibility(View.VISIBLE);
+                        if (queryText.isEmpty()) {
+                            binding.noFav.setText(R.string.no_favorites_found);
+                        } else {
+                            binding.noFav.setText(MessageFormat.format("No results found for {0}", queryText));
+                        }
+                    } else {
+                        binding.noFav.setVisibility(View.GONE);
+                        FavoriteAdapter adapter = new FavoriteAdapter(getContext(), properties, property -> {});
+                        binding.favList.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    sendMessage(getContext(), "No favorites found");
+                }
+            }
+        });
     }
 }

@@ -11,36 +11,37 @@ import com.google.firebase.firestore.GeoPoint;
 import java.util.List;
 
 public class Property implements Parcelable {
-    String title, description, category, subCategory, userId, propertyId, state, city, address, country, zipLine;
+    String title, description, category, subCategory, userId, propertyId, state, city, address, country, zipCode;
     GeoPoint location;
     int price, views;
     List<String> images, features;
-    Timestamp created_at, last_updated;
+    Timestamp createdAt, updatedAt;
 
     public Property() {
     }
 
     public Property(String title, String description, String category, String subCategory, String userId,
-                    String propertyId, String state, String city, String address, String country, String zipLine,
+                    String propertyId, String state, String city, String address, String country, String zipCode,
                     GeoPoint location, int price, int views, List<String> images,
-                    List<String> features, Timestamp created_at, Timestamp last_updated) {
+                    List<String> features, Timestamp createdAt, Timestamp updatedAt) {
         this.title = title;
         this.description = description;
         this.category = category;
+        this.subCategory = subCategory;
         this.userId = userId;
         this.propertyId = propertyId;
         this.state = state;
         this.city = city;
         this.address = address;
         this.country = country;
-        this.zipLine = zipLine;
+        this.zipCode = zipCode;
         this.location = location;
         this.price = price;
         this.views = views;
         this.images = images;
         this.features = features;
-        this.created_at = created_at;
-        this.last_updated = last_updated;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getTitle() {
@@ -123,12 +124,12 @@ public class Property implements Parcelable {
         this.country = country;
     }
 
-    public String getZipLine() {
-        return zipLine;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZipLine(String zipLine) {
-        this.zipLine = zipLine;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public GeoPoint getLocation() {
@@ -171,20 +172,20 @@ public class Property implements Parcelable {
         this.features = features;
     }
 
-    public Timestamp getCreated_at() {
-        return created_at;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Timestamp getLast_updated() {
-        return last_updated;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setLast_updated(Timestamp last_updated) {
-        this.last_updated = last_updated;
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     protected Property(Parcel in) {
@@ -198,13 +199,13 @@ public class Property implements Parcelable {
         city = in.readString();
         address = in.readString();
         country = in.readString();
-        zipLine = in.readString();
+        zipCode = in.readString();
         price = in.readInt();
         views = in.readInt();
         images = in.createStringArrayList();
         features = in.createStringArrayList();
-        created_at = in.readParcelable(Timestamp.class.getClassLoader());
-        last_updated = in.readParcelable(Timestamp.class.getClassLoader());
+        createdAt = in.readParcelable(Timestamp.class.getClassLoader());
+        updatedAt = in.readParcelable(Timestamp.class.getClassLoader());
     }
 
     public static final Creator<Property> CREATOR = new Creator<Property>() {
@@ -236,12 +237,12 @@ public class Property implements Parcelable {
         dest.writeString(city);
         dest.writeString(address);
         dest.writeString(country);
-        dest.writeString(zipLine);
+        dest.writeString(zipCode);
         dest.writeInt(price);
         dest.writeInt(views);
         dest.writeStringList(images);
         dest.writeStringList(features);
-        dest.writeParcelable(created_at, flags);
-        dest.writeParcelable(last_updated, flags);
+        dest.writeParcelable(createdAt, flags);
+        dest.writeParcelable(updatedAt, flags);
     }
 }
