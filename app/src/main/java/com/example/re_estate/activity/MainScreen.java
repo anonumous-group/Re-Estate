@@ -47,13 +47,16 @@ public class MainScreen extends AppCompatActivity {
             favoriteFragment = new FavoriteFragment();
 
             // Add all fragments initially and hide them, show the first one
+            activeFragment = homeFragment;
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.frame_layout, homeFragment);
             transaction.add(R.id.frame_layout, exploreFragment);
             transaction.add(R.id.frame_layout, favoriteFragment);
+            transaction.hide(exploreFragment);
+            transaction.hide(favoriteFragment);
+            transaction.show(homeFragment);
             transaction.commit();
-            activeFragment = homeFragment;
         }
         else {
             // Re-acquire fragment instances after a configuration change (if needed)
