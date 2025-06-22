@@ -37,6 +37,10 @@ public class FirebaseUtil {
         return propertyCol().document(uid);
     }
 
+    public static CollectionReference chatCol() {
+        return userDoc(userId()).collection("chats");
+    }
+
     public static StorageReference storageRef() {
         return FirebaseStorage.getInstance().getReference();
     }

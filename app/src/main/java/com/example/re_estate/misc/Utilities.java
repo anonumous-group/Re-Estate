@@ -14,6 +14,11 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.Timestamp;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class Utilities {
 
     public static void setInProgress(Button button, ProgressBar progressBar, boolean inProgress) {
@@ -54,5 +59,10 @@ public class Utilities {
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return bitmap;
+    }
+
+    public static String formatTime(Timestamp timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+        return sdf.format(timestamp.toDate());
     }
 }

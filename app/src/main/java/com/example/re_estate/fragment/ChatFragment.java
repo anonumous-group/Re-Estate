@@ -1,7 +1,10 @@
 package com.example.re_estate.fragment;
 
+import static com.example.re_estate.misc.FirebaseUtil.chatCol;
+
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,58 +12,57 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.re_estate.R;
+import com.example.re_estate.database.Chatroom;
+import com.example.re_estate.databinding.FragmentChatBinding;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ChatFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class ChatFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ChatFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ChatFragment newInstance(String param1, String param2) {
-        ChatFragment fragment = new ChatFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentChatBinding binding;
+    private String agent = "";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        binding = FragmentChatBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    private void getChats() {
+        Query query = chatCol().orderBy("last_message_time", Query.Direction.DESCENDING);
+
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot snapshots = task.getResult();
+                if (snapshots != null && !snapshots.isEmpty()) {
+                    List<Chatroom> chatrooms = new ArrayList<>();
+                    for (QueryDocumentSnapshot snapshot : snapshots) {
+                        Chatroom chatroom = snapshot.toObject(Chatroom.class);
+                        if (agent.isEmpty()) {
+                            chatrooms.add(chatroom);
+                        } else {
+                            if (chatroom.getParticipants().get(0).toLowerCase(Locale.getDefault())
+                                    .contains(agent.toLowerCase(Locale.getDefault()))) {
+                                chatrooms.add(chatroom);
+                            }
+                        }
+                    }
+                } else {
+                    binding.progBar.setVisibility(View.GONE);
+                    binding.noChat.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 }

@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/blue"
+    android:background="@color/white"
     tools:context=".fragment.ChatFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/blue"
         android:text="Chats"
         android:padding="10dp"
         android:textSize="24sp"
@@ -21,48 +21,86 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="16dp"
-        android:background="@drawable/rounded_edge_bg"
-        android:backgroundTint="@color/white"
+        android:layout_margin="10dp"
         android:gravity="center">
 
         <EditText
+            android:id="@+id/search_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:padding="10dp"
-            android:inputType="text"
-            android:hint="Search agent"
-            android:textColorHint="@color/gray"
+            android:background="@drawable/rounded_edge_bg"
+            android:backgroundTint="@color/off_white"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/gray"
             android:fontFamily="@font/inter_28pt_medium"
+            android:hint="@string/search_appointment"
+            android:inputType="text"
+            android:padding="10dp"
             android:textColor="@color/black"
-            android:id="@+id/search_bar"/>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            app:dividerColor="@color/gray"
-            android:layout_marginHorizontal="5dp"/>
-
+            android:textColorHint="@color/gray" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/search"
             android:padding="10dp"
+            android:background="@drawable/rounded_edge_bg"
+            android:backgroundTint="@color/blue"
+            android:layout_marginStart="10dp"
+            app:tint="@color/white"
             android:id="@+id/btn_search"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/blue"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/off_white"
+        android:gravity="center"
+        android:orientation="vertical"
         android:background="@drawable/rounded_top_bg">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/white"
+            android:id="@+id/prog_bar"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/chat_rv"
+            tools:listitem="@layout/chat_list"
+            android:layout_margin="5dp"
+            tools:itemCount="9"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"/>
+
+        <LinearLayout
+            android:id="@+id/no_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:tint="@color/gray"
+                android:src="@drawable/no_chat"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="No Chat"
+                android:fontFamily="@font/inter_28pt_medium"
+                android:textSize="20sp"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
