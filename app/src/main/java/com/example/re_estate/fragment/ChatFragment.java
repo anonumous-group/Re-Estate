@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,16 +64,40 @@ public class ChatFragment extends Fragment {
 
             if (chatLoaded) {
                 binding.searchBar.setText("");
-                agent = "";
-                binding.searchCloseBtn.setVisibility(View.GONE);
-                binding.progBar.setVisibility(View.VISIBLE);
-                binding.noChat.setVisibility(View.GONE);
-                binding.chatRv.setAdapter(null);
-                binding.chatRv.setVisibility(View.GONE);
                 binding.searchBar.clearFocus();
+
+                if (!agent.isEmpty()) {
+                    agent = "";
+                    binding.searchCloseBtn.setVisibility(View.GONE);
+                    binding.progBar.setVisibility(View.VISIBLE);
+                    binding.noChat.setVisibility(View.GONE);
+                    binding.chatRv.setAdapter(null);
+                    binding.chatRv.setVisibility(View.GONE);
+                }
                 getChats();
             } else {
                 sendMessage(getContext(), "Database in progress");
+            }
+        });
+
+        binding.searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 0) {
+                    binding.searchCloseBtn.setVisibility(View.VISIBLE);
+                } else {
+                    binding.searchCloseBtn.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
