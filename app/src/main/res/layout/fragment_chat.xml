@@ -24,22 +24,39 @@
         android:layout_margin="10dp"
         android:gravity="center">
 
-        <EditText
-            android:id="@+id/search_bar"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_edge_bg"
-            android:backgroundTint="@color/off_white"
-            android:drawableStart="@drawable/search"
-            android:drawablePadding="10dp"
-            android:drawableTint="@color/gray"
-            android:fontFamily="@font/inter_28pt_medium"
-            android:hint="@string/search_appointment"
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray" />
+            android:backgroundTint="@color/off_white">
+
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/search"
+                android:background="@android:color/transparent"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/inter_28pt_medium"
+                android:hint="@string/search_appointment"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/close"
+                android:visibility="gone"
+                android:id="@+id/search_close_btn"
+                app:tint="@color/gray" />
+        </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

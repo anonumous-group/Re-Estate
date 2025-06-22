@@ -50,6 +50,7 @@ public class ChatroomAdapter extends RecyclerView.Adapter<ChatroomAdapter.roomHo
                                 .error(R.drawable.profile_image).into(holder.profile);
                     }
                 });
+        holder.itemView.setOnClickListener(v -> listener.onClick(chatroom, position));
     }
 
     @Override
