@@ -22,4 +22,6 @@
     <string name="see_all">See All</string>
     <string name="favorite">Favorite</string>
     <string name="no_favorites_found">No favorites found</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes_remove">Yes, Remove</string>
 </resources>

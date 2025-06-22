@@ -53,17 +53,19 @@
             android:backgroundTint="@color/off_white">
 
             <EditText
+                android:id="@+id/search_bar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:padding="10dp"
-                android:hint="@string/search_hint"
-                android:textColorHint="@color/gray"
                 android:drawableStart="@drawable/search"
-                android:drawableTint="@color/gray"
                 android:drawablePadding="10dp"
-                android:id="@+id/search_bar"/>
+                android:drawableTint="@color/gray"
+                android:hint="@string/search_hint"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                tools:ignore="NestedWeights" />
 
             <ImageView
                 android:layout_width="wrap_content"

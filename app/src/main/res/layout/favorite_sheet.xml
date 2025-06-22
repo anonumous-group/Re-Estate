@@ -3,39 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@drawable/rounded_top_bg"
+    android:layout_height="wrap_content"
     android:backgroundTint="@color/white"
-    android:paddingBottom="20dp"
-    android:layout_height="wrap_content">
+    android:background="@drawable/rounded_top_bg">
 
     <ImageView
+        android:id="@+id/btn_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:src="@drawable/close"
         android:padding="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/btn_close"/>
+        android:src="@drawable/close" />
 
     <TextView
-        android:id="@+id/camera"
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_edge_bg"
         android:backgroundTint="@color/off_white"
         android:layout_marginHorizontal="10dp"
         android:padding="10dp"
-        android:text="@string/camera"
+        android:text="View Property"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:fontFamily="@font/inter_28pt_medium"
         android:gravity="center_vertical"
         android:drawablePadding="10dp"
-        app:drawableStartCompat="@drawable/camera"
+        app:drawableStartCompat="@drawable/fullscreen"
         app:drawableTint="@color/gray"/>
 
     <TextView
-        android:id="@+id/gallery"
+        android:id="@+id/remove"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_edge_bg"
@@ -43,13 +41,13 @@
         android:layout_marginHorizontal="10dp"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/gallery"
+        android:text="Remove from Favorites"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:fontFamily="@font/inter_28pt_medium"
         android:gravity="center_vertical"
         android:drawablePadding="10dp"
-        app:drawableStartCompat="@drawable/gallery"
+        app:drawableStartCompat="@drawable/favorite_border"
         app:drawableTint="@color/gray"/>
 
 </LinearLayout>

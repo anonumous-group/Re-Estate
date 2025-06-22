@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
+    android:background="@drawable/rounded_top_bg"
+    android:gravity="center"
+    android:padding="10dp">
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminateTint="@color/blue"
+        android:indeterminate="true"
+        android:id="@+id/prog_bar"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove from Favorites?"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="@font/inter_28pt_bold"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerColor="@color/off_white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="10dp">
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/profile_image"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/property_image"/>
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_bg"
+                android:backgroundTint="@color/off_white"
+                android:padding="7dp"
+                android:src="@drawable/favorite_border"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                android:id="@+id/add_fav"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/off_white"
+                android:background="@drawable/rounded_edge_bg"
+                android:text="@string/residential"
+                android:fontFamily="@font/inter_28pt_medium"
+                android:textColor="@color/blue"
+                android:padding="5dp"
+                android:textSize="18sp"
+                android:id="@+id/property_category"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_28pt_bold"
+                tools:text="@string/app_name"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/property_name"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_28pt_medium"
+                app:drawableStartCompat="@drawable/location_on"
+                app:drawableTint="@color/gray"
+                tools:text="Lagos, Nigeria"
+                android:textSize="18sp"
+                android:textColor="@color/gray"
+                android:drawablePadding="10dp"
+                android:id="@+id/property_location"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_28pt_bold"
+                tools:text="@string/app_name"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/property_price"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner_bg"
+            app:backgroundTint="@color/off_white"
+            android:text="@string/cancel"
+            android:textColor="@color/blue"
+            android:fontFamily="@font/inter_28pt_bold"
+            android:id="@+id/btn_cancel"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner_bg"
+            app:backgroundTint="@color/blue"
+            android:layout_marginStart="10dp"
+            android:text="@string/yes_remove"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_28pt_bold"
+            android:id="@+id/btn_confirm"/>
+    </LinearLayout>
+
+</LinearLayout>

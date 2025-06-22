@@ -2,6 +2,7 @@ package com.example.re_estate.fragment;
 
 import static com.example.re_estate.databinding.FragmentFavoriteBinding.inflate;
 import static com.example.re_estate.misc.FirebaseUtil.favCol;
+import static com.example.re_estate.misc.FirebaseUtil.favDoc;
 import static com.example.re_estate.misc.Utilities.sendMessage;
 
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.example.re_estate.R;
 import com.example.re_estate.adapter.FavoriteAdapter;
 import com.example.re_estate.database.Property;
 import com.example.re_estate.databinding.FragmentFavoriteBinding;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -49,11 +52,15 @@ public class FavoriteFragment extends Fragment {
         binding.btnClose.setOnClickListener(v -> {
             binding.searchContainer.setVisibility(View.GONE);
             binding.toolbar.setVisibility(View.VISIBLE);
+            queryText = "";
+            binding.searchBar.setText("");
+            binding.searchBar.clearFocus();
             showFav();
         });
 
         binding.btnSearch.setOnClickListener(v -> {
             queryText = binding.searchBar.getText().toString();
+            binding.favList.setAdapter(null);
             showFav();
         });
 
@@ -82,7 +89,9 @@ public class FavoriteFragment extends Fragment {
                     }
 
                     binding.noFav.setVisibility(View.GONE);
-                    FavoriteAdapter adapter = new FavoriteAdapter(getContext(), properties, property -> {});
+                    FavoriteAdapter adapter = new FavoriteAdapter(getContext(), properties, property -> {
+                        openFavoriteSheet(property);
+                    });
                     binding.favList.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 } else {
@@ -93,7 +102,48 @@ public class FavoriteFragment extends Fragment {
                         binding.noFav.setText(MessageFormat.format("No results found for {0}", queryText));
                     }
                 }
+            } else {
+                Log.e("FavoriteFragment", "Error getting documents: ", task.getException());
             }
+        });
+    }
+
+    private void openFavoriteSheet(Property property) {
+        BottomSheetDialog favDialog = new BottomSheetDialog(requireContext());
+        favDialog.setContentView(R.layout.favorite_sheet);
+        favDialog.show();
+
+        favDialog.findViewById(R.id.btn_close).setOnClickListener(v -> favDialog.dismiss());
+
+        favDialog.findViewById(R.id.view).setOnClickListener(v -> {
+            favDialog.dismiss();
+            sendMessage(requireContext(), property.getTitle());
+        });
+
+        favDialog.findViewById(R.id.remove).setOnClickListener(v -> {
+            openRemoveSheet(property);
+            favDialog.dismiss();
+        });
+    }
+
+    private void openRemoveSheet(Property property) {
+        BottomSheetDialog removeSheet = new BottomSheetDialog(requireContext());
+        removeSheet.setContentView(R.layout.remove_favorite_sheet);
+        removeSheet.show();
+
+        removeSheet.findViewById(R.id.btn_cancel).setOnClickListener(v -> removeSheet.dismiss());
+        removeSheet.findViewById(R.id.btn_confirm).setOnClickListener(v -> {
+            removeSheet.findViewById(R.id.prog_bar).setVisibility(View.VISIBLE);
+            removeSheet.findViewById(R.id.buttons).setVisibility(View.GONE);
+
+            favDoc(property.getPropertyId()).delete().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    removeSheet.dismiss();
+                    showFav();
+                } else {
+                    Log.e("FavoriteFragment", "Error deleting document: ", task.getException());
+                }
+            });
         });
     }
 }
