@@ -46,7 +46,6 @@ public class CompleteProfileScreen extends AppCompatActivity {
     GeoPoint geoPoint;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_PICK = 2;
-    private static final int REQUEST_LOCATION = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
