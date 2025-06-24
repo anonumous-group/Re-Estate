@@ -4,6 +4,7 @@ import static com.example.re_estate.databinding.FragmentFavoriteBinding.inflate;
 import static com.example.re_estate.misc.FirebaseUtil.favCol;
 import static com.example.re_estate.misc.FirebaseUtil.favDoc;
 import static com.example.re_estate.misc.FirebaseUtil.userDoc;
+import static com.example.re_estate.misc.FirebaseUtil.userId;
 import static com.example.re_estate.misc.Utilities.sendMessage;
 
 import android.os.Bundle;
@@ -157,7 +158,7 @@ public class FavoriteFragment extends Fragment {
                 if (task.isSuccessful()) {
                     userDoc(userId()).get().addOnSuccessListener(snapshot -> {
                         List<String> favs = (List<String>) snapshot.get("favorites");
-                    })
+                    });
                     removeSheet.dismiss();
                     showFav();
                 } else {
