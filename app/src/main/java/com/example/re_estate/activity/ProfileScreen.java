@@ -58,6 +58,7 @@ public class ProfileScreen extends AppCompatActivity {
 
         setUpUserProfile();
 
+        binding.btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         binding.selectImage.setOnClickListener(v -> openBottomSheet());
         binding.btnUpdate.setOnClickListener(v -> updateUser());
 
