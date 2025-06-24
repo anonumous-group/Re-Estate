@@ -3,6 +3,7 @@ package com.example.re_estate.fragment;
 import static com.example.re_estate.databinding.FragmentFavoriteBinding.inflate;
 import static com.example.re_estate.misc.FirebaseUtil.favCol;
 import static com.example.re_estate.misc.FirebaseUtil.favDoc;
+import static com.example.re_estate.misc.FirebaseUtil.userDoc;
 import static com.example.re_estate.misc.Utilities.sendMessage;
 
 import android.os.Bundle;
@@ -14,11 +15,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.re_estate.R;
 import com.example.re_estate.adapter.FavoriteAdapter;
 import com.example.re_estate.database.Property;
 import com.example.re_estate.databinding.FragmentFavoriteBinding;
+import com.example.re_estate.misc.Utilities;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
@@ -131,6 +136,18 @@ public class FavoriteFragment extends Fragment {
         removeSheet.setContentView(R.layout.remove_favorite_sheet);
         removeSheet.show();
 
+        TextView category = removeSheet.findViewById(R.id.property_category);
+        TextView name = removeSheet.findViewById(R.id.property_name);
+        TextView location = removeSheet.findViewById(R.id.property_location);
+        TextView price = removeSheet.findViewById(R.id.property_price);
+        ImageView image = removeSheet.findViewById(R.id.property_image);
+
+        category.setText(property.getCategory());
+        name.setText(property.getTitle());
+        location.setText(MessageFormat.format("{0}, {1}", property.getState(), property.getCountry()));
+        price.setText(Utilities.formatPrice(property.getPrice()));
+        Glide.with(getContext()).load(property.getImages().get(0)).into(image);
+
         removeSheet.findViewById(R.id.btn_cancel).setOnClickListener(v -> removeSheet.dismiss());
         removeSheet.findViewById(R.id.btn_confirm).setOnClickListener(v -> {
             removeSheet.findViewById(R.id.prog_bar).setVisibility(View.VISIBLE);
@@ -138,6 +155,9 @@ public class FavoriteFragment extends Fragment {
 
             favDoc(property.getPropertyId()).delete().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+                    userDoc(userId()).get().addOnSuccessListener(snapshot -> {
+                        List<String> favs = (List<String>) snapshot.get("favorites");
+                    })
                     removeSheet.dismiss();
                     showFav();
                 } else {

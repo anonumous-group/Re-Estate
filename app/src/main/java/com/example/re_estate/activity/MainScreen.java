@@ -18,6 +18,7 @@ import com.example.re_estate.fragment.ChatFragment;
 import com.example.re_estate.fragment.ExploreFragment;
 import com.example.re_estate.fragment.FavoriteFragment;
 import com.example.re_estate.fragment.HomeFragment;
+import com.example.re_estate.fragment.ProfileFragment;
 
 public class MainScreen extends AppCompatActivity {
     ActivityMainScreenBinding binding;
@@ -25,6 +26,7 @@ public class MainScreen extends AppCompatActivity {
     private ExploreFragment exploreFragment;
     private FavoriteFragment favoriteFragment;
     private ChatFragment chatFragment;
+    private ProfileFragment profileFragment;
     private Fragment activeFragment; // To keep track of the currently active fragment
 
     @Override
@@ -48,6 +50,7 @@ public class MainScreen extends AppCompatActivity {
             exploreFragment = new ExploreFragment();
             favoriteFragment = new FavoriteFragment();
             chatFragment = new ChatFragment();
+            profileFragment = new ProfileFragment();
 
             // Add all fragments initially and hide them, show the first one
             activeFragment = homeFragment;
@@ -57,10 +60,12 @@ public class MainScreen extends AppCompatActivity {
             transaction.add(R.id.frame_layout, exploreFragment);
             transaction.add(R.id.frame_layout, favoriteFragment);
             transaction.add(R.id.frame_layout, chatFragment);
+            transaction.add(R.id.frame_layout, profileFragment);
+            transaction.show(homeFragment);
             transaction.hide(exploreFragment);
             transaction.hide(favoriteFragment);
             transaction.hide(chatFragment);
-            transaction.show(homeFragment);
+            transaction.hide(profileFragment);
             transaction.commit();
         }
         else {
@@ -69,6 +74,7 @@ public class MainScreen extends AppCompatActivity {
             exploreFragment = (ExploreFragment) getSupportFragmentManager().findFragmentByTag("2");
             favoriteFragment = (FavoriteFragment) getSupportFragmentManager().findFragmentByTag("3");
             chatFragment = (ChatFragment) getSupportFragmentManager().findFragmentByTag("4");
+            profileFragment = (ProfileFragment) getSupportFragmentManager().findFragmentByTag("5");
             // Determine active fragment based on saved instance state if you save it, or default to home
             // For simplicity, we'll re-select the bottom nav item which will trigger the show/hide logic
         }
@@ -85,6 +91,8 @@ public class MainScreen extends AppCompatActivity {
                 fragment = favoriteFragment;
             } else if (itemId == R.id.chat) {
                 fragment = chatFragment;
+            } else {
+                fragment = profileFragment;
             }
 
             if (fragment != null && fragment != activeFragment) {

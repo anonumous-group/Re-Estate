@@ -80,6 +80,7 @@
         android:id="@+id/pass"/>
 
     <TextView
+        android:id="@+id/forgot_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -88,6 +89,13 @@
         android:textSize="18sp"
         android:textColor="@color/blue"
         android:fontFamily="@font/inter_28pt_medium"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:indeterminateTint="@color/blue"
+        android:id="@+id/prog_bar"/>
 
     <Button
         android:layout_width="match_parent"
