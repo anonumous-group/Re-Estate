@@ -7,4 +7,6 @@
     <color name="black">#020B2B</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_white">#19FFFFFF</color>
+    <color name="red">#FFFF0000</color>
+    <color name="purple">#FF6200EE</color>
 </resources>

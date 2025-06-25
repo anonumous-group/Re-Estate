@@ -26,6 +26,9 @@
         android:theme="@style/Theme.ReEstate"
         tools:targetApi="31">
         <activity
+            android:name=".activity.payment.AddCardScreen"
+            android:exported="false" />
+        <activity
             android:name=".activity.PaymentMethodScreen"
             android:exported="false" />
         <activity
