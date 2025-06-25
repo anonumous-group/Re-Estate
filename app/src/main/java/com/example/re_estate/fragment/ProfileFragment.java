@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.re_estate.R;
+import com.example.re_estate.activity.PaymentMethodScreen;
 import com.example.re_estate.activity.ProfileScreen;
 import com.example.re_estate.activity.auth.WelcomeScreen;
 import com.example.re_estate.database.User;
@@ -41,6 +42,7 @@ public class ProfileFragment extends Fragment {
         getUser();
 
         binding.tvProfile.setOnClickListener(v -> startActivity(new Intent(getContext(), ProfileScreen.class)));
+        binding.tvWallet.setOnClickListener(v -> {startActivity(new Intent(getContext(), PaymentMethodScreen.class));});
         binding.tvLogout.setOnClickListener(v -> {
             BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
             dialog.setContentView(R.layout.logout_notice);

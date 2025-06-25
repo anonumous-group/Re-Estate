@@ -98,10 +98,11 @@
                         android:src="@drawable/edit"
                         android:padding="10dp"
                         android:background="@drawable/rounded_corner_bg"
-                        android:backgroundTint="@color/blue"
+                        android:backgroundTint="@color/off_white"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:id="@+id/select_image"/>
+                        android:id="@+id/select_image"
+                        app:tint="@color/gray" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -251,7 +252,8 @@
             android:padding="16dp"
             android:background="@color/white"
             android:elevation="4dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <ProgressBar
                 android:layout_width="wrap_content"
