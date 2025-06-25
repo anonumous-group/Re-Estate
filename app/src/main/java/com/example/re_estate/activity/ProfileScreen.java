@@ -52,7 +52,7 @@ public class ProfileScreen extends AppCompatActivity {
         setContentView(binding.main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(32, systemBars.top, 32, 0);
+            v.setPadding(20, systemBars.top, 32, 0);
             return insets;
         });
 
