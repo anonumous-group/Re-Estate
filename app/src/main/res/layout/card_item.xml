@@ -4,12 +4,19 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
 
-    <ImageView
-        android:id="@+id/card_color"
+    <TextView
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:background="@drawable/rounded_edge_bg"
-        android:backgroundTint="@color/blue"/>
+        android:backgroundTint="@color/blue"
+        android:padding="10dp"
+        android:text="VISA"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/inter_28pt_medium"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:id="@+id/card_color"/>
 
     <TextView
         android:layout_width="match_parent"

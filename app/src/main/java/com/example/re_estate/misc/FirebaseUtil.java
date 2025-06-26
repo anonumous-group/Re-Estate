@@ -29,6 +29,14 @@ public class FirebaseUtil {
         return favCol().document(fid);
     }
 
+    public static CollectionReference cardCol() {
+        return userDoc(userId()).collection("cards");
+    }
+
+    public static DocumentReference cardDoc(String cid) {
+        return cardCol().document(cid);
+    }
+
     public static CollectionReference propertyCol() {
         return FirebaseFirestore.getInstance().collection("properties");
     }
