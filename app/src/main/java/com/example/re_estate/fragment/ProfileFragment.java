@@ -25,6 +25,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.MessageFormat;
+
 public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {
@@ -41,6 +43,7 @@ public class ProfileFragment extends Fragment {
 
         getUser();
 
+        binding.accountBalance.setText(MessageFormat.format("{0} credit balance: $0.00", getString(R.string.app_name)));
         binding.tvProfile.setOnClickListener(v -> startActivity(new Intent(getContext(), ProfileScreen.class)));
         binding.tvWallet.setOnClickListener(v -> {startActivity(new Intent(getContext(), PaymentMethodScreen.class));});
         binding.tvLogout.setOnClickListener(v -> {

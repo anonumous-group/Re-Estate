@@ -16,6 +16,9 @@ activity = "1.10.1"
 constraintlayout = "2.2.1"
 playServicesLocation = "21.3.0"
 playServicesMaps = "19.2.0"
+playServicesPay = "16.5.0"
+stripeAndroid = "21.17.0"
+stripeJava = "22.37.0"
 
 [libraries]
 billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
@@ -33,6 +36,9 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+play-services-pay = { module = "com.google.android.gms:play-services-pay", version.ref = "playServicesPay" }
+stripe-android = { module = "com.stripe:stripe-android", version.ref = "stripeAndroid" }
+stripe-java = { module = "com.stripe:stripe-java", version.ref = "stripeJava" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
